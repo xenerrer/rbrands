@@ -20,6 +20,12 @@
     }));
   }
 
+  /* header: no celular some depois do primeiro scroll */
+  const bar = document.querySelector('.bar');
+  const mobile = matchMedia('(max-width: 820px)');
+  const syncBar = () => { if (bar) bar.classList.toggle('is-hidden', mobile.matches && window.scrollY > 70); };
+  window.addEventListener('scroll', syncBar, { passive: true }); syncBar();
+
   /* barra de progresso */
   const prog = document.querySelector('.bar__progress i');
   ScrollTrigger.create({ start: 0, end: 'max', onUpdate: s => prog && (prog.style.transform = `scaleX(${s.progress})`) });
@@ -95,13 +101,11 @@
 
   /* carrossel horizontal preso */
   const rail = document.querySelector('[data-rail]');
-  if (rail && !reduce && matchMedia('(min-width: 821px)').matches) {
+  if (rail && !reduce) {
     const track = rail.querySelector('[data-rail-track]');
     const dist = () => Math.max(0, track.scrollWidth - window.innerWidth + 40);
     const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: rail, start: 'top 64px', end: () => '+=' + (dist() * 1.25), scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true } });
     tl.to({}, { duration: 0.2 }).to(track, { x: () => -dist(), duration: 1 });
-  } else if (rail) {
-    rail.querySelector('[data-rail-track]').style.cssText = 'overflow-x:auto;width:auto;scroll-snap-type:x mandatory';
   }
 
   /* fechamento: o tênis atravessa para o lado conforme a seção entra */
