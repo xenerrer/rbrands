@@ -104,6 +104,10 @@
     rail.querySelector('[data-rail-track]').style.cssText = 'overflow-x:auto;width:auto;scroll-snap-type:x mandatory';
   }
 
+  /* fechamento: o tênis atravessa para o lado conforme a seção entra */
+  const cs = document.querySelector('[data-closing-shoe]');
+  if (cs && !reduce) gsap.fromTo(cs, { xPercent: 18, yPercent: 6 }, { xPercent: -4, yPercent: 0, ease: 'none', scrollTrigger: { trigger: '[data-closing]', start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } });
+
   /* recalcula quando imagens e fontes terminam de carregar (muda a altura da página e a largura da faixa) */
   const refresh = () => ScrollTrigger.refresh();
   window.addEventListener('load', refresh);

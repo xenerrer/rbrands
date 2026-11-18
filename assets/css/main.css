@@ -155,8 +155,18 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.9em;background:rgba(255
 .rail__track{padding-bottom:0}
 
 /* fechamento */
-.closing{padding:clamp(6rem,14vw,12rem) 0 clamp(4rem,8vw,7rem);background:var(--grafite);position:relative;overflow:hidden}
-.closing::before{content:"";position:absolute;inset:auto -10% -40% -10%;height:90%;background:radial-gradient(60% 60% at 25% 100%,rgba(232,80,28,.45),rgba(232,80,28,0) 70%)}
-.closing .wrap{position:relative}
-.closing__text{max-width:52ch;margin-top:2rem;font-size:clamp(1.15rem,1.7vw,1.6rem);line-height:1.5}
-.closing__sign{margin-top:2.4rem;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--urucum)}
+.closing{position:relative;overflow:hidden;background:var(--grafite);padding:clamp(7rem,14vw,12rem) 0 clamp(5rem,9vw,8rem);min-height:min(100vh,860px);display:flex;align-items:center;isolation:isolate}
+.closing::before{content:"";position:absolute;inset:auto -10% -45% -10%;height:95%;z-index:-2;background:radial-gradient(55% 60% at 70% 100%,rgba(232,80,28,.55),rgba(232,80,28,0) 70%)}
+.closing__topo{position:absolute;inset:auto 0 0 0;width:100%;height:60%;z-index:-2;color:rgba(238,240,240,.12)}
+.closing__shoe{position:absolute;z-index:-1;right:-14%;bottom:-6%;width:min(78vw,1250px);height:auto;pointer-events:none;will-change:transform}
+.closing__grid{position:relative;display:grid;gap:clamp(1.4rem,3vw,2.4rem);justify-items:start}
+.closing__title{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(4.5rem,13vw,12rem);line-height:.84;letter-spacing:-.01em}
+.closing__body{display:grid;gap:1.1rem;max-width:44ch;margin-top:.6rem}
+.closing__text{font-size:clamp(1.1rem,1.5vw,1.4rem);line-height:1.5;color:var(--nevoa)}
+.closing__text:first-child{font-weight:600}
+.closing__text+.closing__text{color:var(--gelo)}
+.closing__sign{display:grid;gap:.3rem;margin-top:1.4rem}
+.closing__line{display:block;width:72px;height:3px;background:var(--urucum);margin-bottom:.8rem}
+.closing__sign b{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1;color:var(--urucum)}
+.closing__sign i{font-style:normal;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--pedra)}
+@media(max-width:820px){.closing{align-items:flex-start}.closing__shoe{width:140vw;right:-45%;bottom:-2%;opacity:.55}.closing__title{font-size:clamp(4rem,19vw,7rem)}}
