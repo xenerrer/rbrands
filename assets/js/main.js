@@ -64,6 +64,7 @@
     const paths = hero.querySelectorAll('[data-draw]');
     paths.forEach(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
 
+    const M = matchMedia('(max-width: 820px)').matches;
     const tl = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
@@ -71,17 +72,28 @@
         onUpdate: s => { if (frames.ready && frames.draw) frames.draw(Math.min(frames.n - 1, Math.floor(s.progress * frames.n))); }
       }
     });
-    tl.fromTo(shoe, { xPercent: 7, yPercent: 24, rotate: -2, scale: 1 }, { xPercent: 10, yPercent: 18, rotate: 0, scale: 1.04, duration: 1 }, 0)
+    tl.fromTo(shoe, { xPercent: M ? 0 : 7, yPercent: M ? -14 : 24, rotate: -2, scale: 1 }, { xPercent: M ? 0 : 10, yPercent: M ? -16 : 18, rotate: 0, scale: M ? 1 : 1.04, duration: 1 }, 0)
       .to(paths, { strokeDashoffset: 0, stagger: 0.12, duration: 1.4 }, 0)
       .to(scrollHint, { opacity: 0, duration: 0.2 }, 0)
       .fromTo(a, { opacity: 1 }, { opacity: 0, y: -30, duration: 0.5 }, 0.9)
       .to(title, { yPercent: -18, opacity: 0.12, duration: 1.4 }, 1)
-      .to(shoe, { xPercent: 26, yPercent: 12, rotate: 4, scale: 1.2, duration: 1.6 }, 1.2);
+      .to(shoe, { xPercent: M ? 30 : 26, yPercent: M ? 0 : 12, rotate: 4, scale: M ? 1.02 : 1.2, duration: 1.6 }, 1.2);
     tech.forEach((li, i) => tl.fromTo(li, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.4 }, 1.6 + i * 0.35));
     tl.to(tech, { opacity: 0, duration: 0.4, stagger: 0.04 }, 3.6)
-      .to(shoe, { xPercent: 90, yPercent: 4, rotate: 8, duration: 1.2 }, 3.5)
+      .to(shoe, { xPercent: M ? 70 : 90, yPercent: M ? -4 : 4, rotate: 8, duration: 1.2 }, 3.5)
       .to(title, { opacity: 0, duration: 0.6 }, 3.6);
   }
+
+  /* ampliar imagens ao tocar */
+  const lb = document.createElement('div'); lb.className = 'lightbox'; lb.innerHTML = '<button class="lightbox__close" aria-label="Fechar">×</button><img alt="">'; document.body.appendChild(lb);
+  const lbi = lb.querySelector('img');
+  const closeLb = () => { lb.classList.remove('is-open'); document.documentElement.style.overflow = ''; if (lenis) lenis.start(); };
+  lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('lightbox__close')) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+  document.querySelectorAll('.banners img, .duo img, .emails img, .mobiles img').forEach(im => {
+    im.classList.add('zoomable');
+    im.addEventListener('click', () => { lbi.src = im.currentSrc || im.src; lbi.alt = im.alt; lb.scrollTop = 0; lb.scrollLeft = 0; lb.classList.add('is-open'); if (lenis) lenis.stop(); });
+  });
 
   /* reveal */
   gsap.utils.toArray('.reveal').forEach(el => {
