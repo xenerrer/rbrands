@@ -6,6 +6,7 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!window.gsap || !window.ScrollTrigger) { document.documentElement.classList.remove('js'); return; }
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
 
   /* scroll suave */
   let lenis = null;
@@ -111,13 +112,18 @@
     ScrollTrigger.create({ trigger: stage, start: 'top top', end: 'bottom bottom', onUpdate: s => set(Math.min(imgs.length - 1, Math.floor(s.progress * imgs.length))) });
   }
 
-  /* carrossel horizontal preso */
-  const rail = document.querySelector('[data-rail]');
-  if (rail && !reduce) {
-    const track = rail.querySelector('[data-rail-track]');
+  /* carrossel horizontal: sticky nativo + scrub (estável no iOS) */
+  const railWrap = document.querySelector('[data-rail-wrap]');
+  if (railWrap) {
+    const rail = railWrap.querySelector('[data-rail]');
+    const track = railWrap.querySelector('[data-rail-track]');
     const dist = () => Math.max(0, track.scrollWidth - window.innerWidth + 40);
-    const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: rail, start: 'top 64px', end: () => '+=' + (dist() * 1.25), scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true } });
-    tl.to({}, { duration: 0.2 }).to(track, { x: () => -dist(), duration: 1 });
+    const size = () => { railWrap.style.height = (rail.offsetHeight + dist() * 1.25) + 'px'; };
+    size();
+    if (!reduce) {
+      gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: railWrap, start: 'top 64px', end: () => '+=' + (dist() * 1.25), scrub: 0.5, invalidateOnRefresh: true, onRefreshInit: size } })
+        .to({}, { duration: 0.2 }).to(track, { x: () => -dist(), duration: 1 });
+    } else { track.style.cssText = 'overflow-x:auto;width:auto;scroll-snap-type:x mandatory'; railWrap.style.height = 'auto'; rail.style.position = 'static'; }
   }
 
   /* fechamento: o tênis atravessa para o lado conforme a seção entra */
