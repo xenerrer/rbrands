@@ -25,10 +25,11 @@
 .gal-zoom figure figcaption{margin-top:.6rem;font-size:.88rem;opacity:.85;max-width:62ch}
 .gal-zoom figcaption b{font-weight:700}
 .img-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;margin-top:2rem}
-.img-grid figure{grid-column:span 4}
+.img-grid{align-items:start}
+.img-grid figure{grid-column:span 4;align-self:start}
 .img-grid figure.w{grid-column:span 8}
 .img-grid figure.f{grid-column:span 12}
-.img-grid img{width:100%;height:100%;object-fit:cover;border-radius:2px;cursor:zoom-in}
+.img-grid img{display:block;width:100%;height:auto;object-fit:cover;border-radius:2px;cursor:zoom-in}
 .img-grid figcaption{margin-top:.5rem;font-size:.82rem;opacity:.8;line-height:1.4}
 .img-grid figcaption b{color:var(--urucum);margin-right:.4em}
 .pair{display:grid;grid-template-columns:3.4fr 1fr;gap:1.5rem;align-items:end;margin-top:2rem}
