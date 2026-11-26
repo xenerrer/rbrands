@@ -107,3 +107,9 @@
 .subhero__shade{position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(14,18,16,.88) 0%,rgba(14,18,16,.35) 55%,rgba(14,18,16,.55) 100%)}
 .subhero--vid .wrap{position:relative;z-index:2;padding-block:clamp(96px,14vw,160px) clamp(40px,6vw,72px)}
 .subhero--vid::after{content:"";position:absolute;left:0;right:0;bottom:0;height:clamp(140px,22vh,260px);z-index:1;background:linear-gradient(180deg,rgba(20,24,27,0) 0%,rgba(20,24,27,.55) 55%,#14181B 100%);pointer-events:none}
+
+/* banners e vídeos desktop: saem da coluna e ocupam quase a tela toda */
+.gal .banners,.gal .vids{width:min(1800px,calc(100vw - 48px));position:relative;left:50%;transform:translateX(-50%)}
+.gal .banners{gap:2.4rem}
+.gal .banners figcaption,.gal .vid figcaption{padding-inline:4px}
+@media(max-width:820px){.gal .banners,.gal .vids{width:calc(100vw - 32px)}}
