@@ -49,3 +49,8 @@
 .ideas p{font-size:.92rem;opacity:.85}
 .soon{display:inline-block;margin-top:2rem;padding:.5rem 1rem;background:var(--urucum);color:#14181B;font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
 @media(max-width:820px){.img-grid figure,.img-grid figure.w{grid-column:span 6}.img-grid figure.f{grid-column:span 12}.pair,.pair2,.emails2{grid-template-columns:1fr}.pair img.m{max-width:360px}}
+
+/* vídeos em loop */
+.loops{display:grid;grid-template-columns:1fr;gap:clamp(20px,3vw,40px);margin-top:clamp(28px,4vw,56px);align-items:start}
+.loops video{width:100%;height:auto;display:block;border-radius:6px;background:#111}
+@media (min-width:900px){.loops{grid-template-columns:2.2fr 1fr}}
