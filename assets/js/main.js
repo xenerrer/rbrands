@@ -91,7 +91,7 @@
   const closeLb = () => { lb.classList.remove('is-open'); document.documentElement.style.overflow = ''; if (lenis) lenis.start(); };
   lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('lightbox__close')) closeLb(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
-  document.querySelectorAll('.banners img, .duo img, .emails img, .mobiles img').forEach(im => {
+  document.querySelectorAll('.banners img, .duo img, .emails img, .mobiles img, .gal-zoom img, .img-grid img, .pair img, .pair2 img, .emails2 img, .scroller img').forEach(im => {
     im.classList.add('zoomable');
     im.addEventListener('click', () => { lbi.src = im.currentSrc || im.src; lbi.alt = im.alt; lb.scrollTop = 0; lb.scrollLeft = 0; lb.classList.add('is-open'); if (lenis) lenis.stop(); });
   });
