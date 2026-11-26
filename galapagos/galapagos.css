@@ -55,3 +55,6 @@
 .loops{display:grid;grid-template-columns:1fr;gap:clamp(20px,3vw,40px);margin-top:clamp(28px,4vw,56px);align-items:start}
 .loops video{width:100%;height:auto;display:block;border-radius:6px;background:#111}
 @media (min-width:900px){.loops{grid-template-columns:2.2fr 1fr}}
+
+/* legendas dos banners: rótulo com respiro */
+.banners figcaption b,.pair2 figcaption b{margin-right:.7em}
