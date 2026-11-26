@@ -58,3 +58,7 @@
 
 /* legendas dos banners: rótulo com respiro */
 .banners figcaption b,.pair2 figcaption b{margin-right:.7em}
+
+/* carrossel fixo: imagens cabem na tela */
+.rail__track img{height:clamp(300px,calc(100svh - 200px),720px)}
+.rail__head .sub{margin-top:1.2rem}
