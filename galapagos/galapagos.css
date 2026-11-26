@@ -80,3 +80,17 @@
 .vid--w{grid-column:span 8}.vid--m{grid-column:span 4}
 .vid figcaption{margin-top:.6rem;font-size:.9rem}
 @media(max-width:820px){.vid--w,.vid--m{grid-column:span 12}}
+
+/* galeria parallax: pinada, colunas em velocidades diferentes */
+.pgal{height:260vh;position:relative;margin-top:2rem}
+.pgal__sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+.pgal__cols{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0 var(--pad)}
+.pgal__col{display:flex;flex-direction:column;gap:14px;will-change:transform}
+.pg{margin:0;position:relative}
+.pg__f{height:min(62vh,560px);overflow:hidden;border-radius:4px;background:#111}
+.pg__f img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform}
+.pg figcaption{position:absolute;left:12px;bottom:10px;color:#fff;font-size:.8rem;font-weight:600;text-shadow:0 1px 12px rgba(0,0,0,.8)}
+.pg figcaption b{color:#FFAD00;margin-right:.5em;background:none;padding:0;width:auto;height:auto;display:inline}
+.pgal__hud{position:absolute;left:var(--pad);right:var(--pad);bottom:18px;display:flex;align-items:center;gap:12px;color:#fff;font-weight:700;font-size:.8rem;mix-blend-mode:difference;pointer-events:none}
+.pgal__hud i{flex:1;height:2px;background:rgba(255,255,255,.3)}.pgal__hud u{display:block;height:100%;width:0;background:#fff}
+@media(max-width:820px){.pgal__cols{gap:8px}.pgal__col{gap:8px}.pg__f{height:44vh}}
